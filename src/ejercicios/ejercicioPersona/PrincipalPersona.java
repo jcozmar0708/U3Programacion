@@ -14,17 +14,17 @@ public class PrincipalPersona {
         double altura = sc.nextDouble();
 
         Persona persona1 = new Persona(nombre,edad,sexo,peso,altura);
-        Persona persona2 = new Persona("Nerea Moreno Ferrer",18,'M');
+        Persona persona2 = new Persona("Pepa",18,'M');
         Persona persona3 = new Persona();
 
-        persona3.setNombre("Inmaculada Cózar Martínez");
+        persona3.setNombre("Alien");
         persona3.setEdad(16);
-        persona3.setSexo('M');
+        persona3.setSexo('A');
         persona3.setPeso(50);
         persona3.setAltura(1.67);
 
         System.out.println(persona1.getNombre() + (persona1.calcularIMC() == persona1.DEBAJO_PESOIDEAL ? " está por debajo de su peso ideal" :
-                    persona1.calcularIMC() == persona1.PESOIDEAL ? " está en su peso ideal" :
+                persona1.calcularIMC() == persona1.PESOIDEAL ? " está en su peso ideal" :
                             persona1.calcularIMC() == persona1.ENCIMA_PESOIDEAL ? " está por encima de su peso ideal" : " no se puede calcular el IMC"));
         System.out.println(persona2.getNombre() + (persona2.calcularIMC() == persona2.DEBAJO_PESOIDEAL ? " está por debajo de su peso ideal" :
                 persona2.calcularIMC() == persona2.PESOIDEAL ? " está en su peso ideal" :
@@ -41,6 +41,8 @@ public class PrincipalPersona {
         System.out.println(persona2);
         System.out.println(persona3);
 
+        /*
+
         persona1.generaDNI();
         persona2.generaDNI();
         persona3.generaDNI();
@@ -48,5 +50,7 @@ public class PrincipalPersona {
         System.out.println(persona1);
         System.out.println(persona2);
         System.out.println(persona3);
+
+         */
     }
 }
