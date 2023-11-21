@@ -1,5 +1,7 @@
 package ejercicios.ejercicioPersona;
 
+import java.util.Random;
+
 public class Persona {
     private String nombre;
     private int edad;
@@ -7,19 +9,15 @@ public class Persona {
     private char sexo;
     private double peso;
     private double altura;
-    public final int DEBAJO_PESOIDEAL = -1;
-    public final int PESOIDEAL = 0;
-    public final int ENCIMA_PESOIDEAL = 1;
-    private final int NO_IMC = 2;
-    private boolean mayorEdad = false;
-    private int numeroDNI;
-    private char letraDNI;
+    private final String LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";
+
 
     public Persona() {
     }
 
     public Persona(String nombre, int edad, char sexo) {
-        this(nombre,edad,sexo,0,0);
+        this.nombre = nombre;
+        this.edad = edad;
         if (comprobarSexo(sexo)) {
             this.sexo = sexo;
         } else {
@@ -41,23 +39,20 @@ public class Persona {
     }
 
     public int calcularIMC () {
-        if (this.peso != 0 && this.altura != 0) {
-            double resultadoIMC = peso / Math.pow(altura, 2);
-            if (resultadoIMC < 20) {
-                return this.DEBAJO_PESOIDEAL;
-            } else if (resultadoIMC >= 20 && resultadoIMC <= 25) {
-                return this.PESOIDEAL;
-            } else {
-                return this.ENCIMA_PESOIDEAL;
-            }
-        } else {
-            return this.NO_IMC;
+        double imc = this.getPeso() / Math.pow(this.getAltura(),2);
+        if (imc < 20) {
+            return -1;
+        } else if (imc <= 20 && imc >= 25) {
+            return 0;
         }
+        return 1;
     }
 
     public boolean isMayorEdad () {
-        if (edad >= 18) this.mayorEdad = true;
-        return this.mayorEdad;
+        if (this.getEdad() >= 18) {
+            return true;
+        }
+        return false;
     }
 
     private boolean comprobarSexo (char sexo) {
@@ -77,23 +72,18 @@ public class Persona {
                 '}';
     }
 
-    public String generaDNI () {
-        calcularNumeroDNI();
-        calcularLetraDNI(this.numeroDNI);
-        this.DNI = "" + this.numeroDNI + this.letraDNI;
-        return this.DNI;
+    public void generaDNI() {
+        if (this.getDNI() == null || this.getDNI().length() == 0) {
+            Random random = new Random();
+            int numero = random.nextInt(90000000) + 10000000;
+
+            int indice = numero % 23;
+            char letra = LETRAS.charAt(indice);
+
+            this.DNI = String.valueOf(numero) + letra;
+        }
     }
 
-    private int calcularNumeroDNI () {
-        this.numeroDNI = (int) (Math.random()*90000000 + 10000000);
-        return this.numeroDNI;
-    }
-
-    private char calcularLetraDNI (int numeroDNI) {
-        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-        letraDNI = letras.charAt(numeroDNI%23);
-        return letraDNI;
-    }
 
     public String getNombre() {
         return nombre;
